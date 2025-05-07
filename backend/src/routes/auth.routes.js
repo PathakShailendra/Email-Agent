@@ -15,6 +15,7 @@ router.get('/google', passport.authenticate('google' , {
 
 router.get('/google/callback', passport.authenticate('google' , {
     failureRedirect: '/login',
+    session: false,
 }), (req, res) => {
     res.send("Login Successfull! You can close this window")
 })
