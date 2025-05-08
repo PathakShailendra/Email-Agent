@@ -4,7 +4,7 @@ import "./Chat.css"
 
 const Chat = () => {
     const [ socket, setSocket ] = useState(null)
-    const [ messages, setMessages ] = useState([ ])
+    const [ messages, setMessages ] = useState([])
     const [ input, setInput ] = useState('')
 
     useEffect(() => {
