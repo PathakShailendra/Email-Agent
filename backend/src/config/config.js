@@ -9,7 +9,8 @@ const _config = {
     GOOGLE_CLIENT_SECRET : process.env.GOOGLE_CLIENT_SECRET || "",
     GOOGLE_REDIRECT_URI : process.env.GOOGLE_REDIRECT_URI || "",
     GOOGLE_SECRET_KEY : process.env.GOOGLE_SECRET_KEY || "",
-    MONGODB_URI : process.env.MONGODB_URI || ""
+    MONGODB_URI : process.env.MONGODB_URI || "",
+    JWT_SECRET : process.env.JWT_SECRET || "",
 }
 
 export default Object.freeze(_config)

@@ -17,7 +17,14 @@ router.get('/google/callback', passport.authenticate('google' , {
     failureRedirect: '/login',
     session: false,
 }), (req, res) => {
-    res.send("Login Successfull! You can close this window")
+    const user = req.user;
+    const token = user.generateAuthToken();
+    res.cookie('token', token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'strict',
+    });
+    res.redirect('http://localhost:5173/auth/success');
 })
 
 

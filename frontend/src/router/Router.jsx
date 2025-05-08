@@ -9,8 +9,8 @@ export const Router = () => {
             <Routes>
                 <Route path="/" element={<h1>Home</h1>} />
                 <Route path="/auth" element={<Auth />} />
-                {/* <Route path="/auth/success" element={<h1>Success</h1>} />
-                <Route path="/chat" element={<Chat />} /> */}
+                <Route path="/auth/success" element={<h1>Success</h1>} />
+                {/* <Route path="/chat" element={<Chat />} /> */}
                 <Route path="*" element={<h1>404 Not Found</h1>} />
             </Routes>
         </AppRouter>

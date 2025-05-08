@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import crypto from 'crypto-js';
 import config from '../config/config.js';
+import jwt from 'jsonwebtoken';
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -31,6 +32,11 @@ userSchema.methods.decryptGoogleRefreshToken = function () {
     const bytes = crypto.AES.decrypt(this.googleRefreshToken, config.GOOGLE_SECRET_KEY);
     const originalText = bytes.toString(crypto.enc.Utf8);
     return originalText;
+}
+
+userSchema.methods.generateAuthToken = function () {
+    const token = jwt.sign({ id: this._id }, config.JWT_SECRET, { expiresIn: '1h' });
+    return token;
 }
 
 
