@@ -24,7 +24,7 @@ router.get('/google/callback', passport.authenticate('google' , {
         secure: true,
         sameSite: 'strict',
     });
-    res.redirect('http://localhost:5173/auth/success');
+    res.redirect('http://localhost:5173/chat');
 })
 
 

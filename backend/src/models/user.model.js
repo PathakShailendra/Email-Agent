@@ -39,6 +39,19 @@ userSchema.methods.generateAuthToken = function () {
     return token;
 }
 
+userSchema.statics.authToken = async function (token) {
+    try {
+        const decoded = jwt.verify(token, config.JWT_SECRET);
+        const user = await this.findById(decoded.id);
+        if (!user) {
+            throw new Error('User not found');
+        }
+        return user;
+    } catch (error) {
+        throw new Error('Invalid token');
+    }
+}
+
 
 const User = mongoose.model('user', userSchema);
 export default User;  
