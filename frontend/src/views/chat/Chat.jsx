@@ -19,6 +19,20 @@ const Chat = () => {
             } ])
         })
 
+        newSocket.on('chat-history', (history) => {
+
+            // console.log('Chat history:', history)
+            const formattedHistory = history.map((message) => {
+                return {
+                    role: message.role,
+                    content: message.parts[ 0 ].text
+                }
+            })
+
+            setMessages(formattedHistory)
+        })
+        
+
         setSocket(newSocket)
 
         return () => {

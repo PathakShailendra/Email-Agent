@@ -21,4 +21,17 @@ export const appendMessage = async (key, messageData) => {
   await redis.rpush(key, JSON.stringify(messageData));
 };
 
+export const getMessages = async (key) => {
+    const messages = await redis.lrange(key, 0, -1);
+    return messages.map((message) => {
+        const tempMessage = JSON.parse(message)
+        return {
+            role: tempMessage.role,
+            parts: [ {
+                text: tempMessage.content,
+            } ]
+        }
+    });
+}
+
 export default redis;

@@ -1,7 +1,7 @@
 import { Server } from "socket.io";
 import userModel from "../models/user.model.js";
 import getResponse from "../service/ai.service.js";
-import { appendMessage } from "../service/cache.service.js";
+import { appendMessage, getMessages } from "../service/cache.service.js";
 
 const initializeSocket = (server) => {
   const io = new Server(server, {
@@ -33,17 +33,26 @@ const initializeSocket = (server) => {
     next();
   });
 
-  io.on("connection", (socket) => {
+  io.on("connection", async (socket) => {
     console.log("New client connected");
+
+    const messages = await getMessages(`conversation:${socket.user._id}`);
+    socket.emit("chat-history", messages);
 
     socket.on("message", async (data) => {
       const { message } = data;
+      
 
       appendMessage(`conversation:${socket.user._id}`, {
         role: "user",
         content: message,
       });
-      const response = await getResponse(message);
+
+
+      const messages = await getMessages(`conversation:${socket.user._id}`);
+      console.log(messages);
+
+      const response = await getResponse(messages);
 
       appendMessage(`conversation:${socket.user._id}`, {
         role: "model",
