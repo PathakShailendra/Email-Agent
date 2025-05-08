@@ -11,6 +11,7 @@ const _config = {
     GOOGLE_SECRET_KEY : process.env.GOOGLE_SECRET_KEY || "",
     MONGODB_URI : process.env.MONGODB_URI || "",
     JWT_SECRET : process.env.JWT_SECRET || "",
+    GOOGLE_GEMINI_API_KEY : process.env.GOOGLE_GEMINI_API_KEY || ""
 }
 
 export default Object.freeze(_config)

@@ -4,12 +4,7 @@ import "./Chat.css"
 
 const Chat = () => {
     const [ socket, setSocket ] = useState(null)
-    const [ messages, setMessages ] = useState([
-        { role: 'user', content: "Hello, how are you?" },
-        { role: 'assistant', content: "I'm good, thanks!" },
-        { role: 'user', content: "What is your name?" },
-        { role: 'assistant', content: "I am an AI assistant" },
-    ])
+    const [ messages, setMessages ] = useState([ ])
     const [ input, setInput ] = useState('')
 
     useEffect(() => {
@@ -41,6 +36,7 @@ const Chat = () => {
 
         setMessages((prevMessages) => [ ...prevMessages, newMessage ])
         setInput('')
+        socket.emit('message', { message: input })
     }
 
 
